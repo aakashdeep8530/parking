@@ -1,0 +1,17 @@
+
+<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="info-circle">
+<g id="Oval">
+<circle cx="15" cy="15" r="11.25" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="15" cy="15" r="11.25" stroke="white" stroke-opacity="0.2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="Path">
+<path d="M14.9996 10H15.0121" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M14.9996 10H15.0121" stroke="white" stroke-opacity="0.2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="Path_2">
+<path d="M13.75 15H15V20H16.25" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M13.75 15H15V20H16.25" stroke="white" stroke-opacity="0.2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+</svg>
