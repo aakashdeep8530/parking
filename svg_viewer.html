@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG Viewer</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        .svg-container {
+            flex: 1;
+            position: relative;
+            background-color: #808080;
+            overflow: hidden;
+        }
+
+        #svg-element {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transform-origin: center;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .zoom-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .zoom-button:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .zoom-slider {
+            width: 200px;
+            -webkit-appearance: none;
+            height: 4px;
+            background: #ffffff;
+            border-radius: 2px;
+            outline: none;
+        }
+
+        .zoom-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: #ffffff;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="svg-container">
+        <svg id="svg-element" width="800" height="600" viewBox="0 0 800 600">
+            <!-- Example SVG content - replace with your actual SVG -->
+            <rect x="100" y="100" width="600" height="400" stroke="green" stroke-width="2" fill="none"/>
+            <circle cx="400" cy="300" r="50" stroke="blue" stroke-width="2" fill="none"/>
+        </svg>
+    </div>
+
+    <div class="controls">
+        <button class="zoom-button" onclick="zoomOut()">−</button>
+        <input type="range" class="zoom-slider" min="10" max="200" value="100" oninput="updateZoom(this.value)">
+        <button class="zoom-button" onclick="zoomIn()">+</button>
+    </div>
+
+    <script>
+        let currentZoom = 1;
+        const ZOOM_STEP = 0.1;
+        const svg = document.getElementById('svg-element');
+        const slider = document.querySelector('.zoom-slider');
+
+        function updateZoom(value) {
+            currentZoom = value / 100;
+            applyTransform();
+        }
+
+        function zoomIn() {
+            currentZoom = Math.min(currentZoom + ZOOM_STEP, 2);
+            slider.value = currentZoom * 100;
+            applyTransform();
+        }
+
+        function zoomOut() {
+            currentZoom = Math.max(currentZoom - ZOOM_STEP, 0.1);
+            slider.value = currentZoom * 100;
+            applyTransform();
+        }
+
+        function applyTransform() {
+            svg.style.transform = `translate(-50%, -50%) scale(${currentZoom})`;
+        }
+
+        // Pan functionality
+        let isDragging = false;
+        let startX, startY, initialX, initialY;
+
+        svg.addEventListener('mousedown', startDragging);
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', stopDragging);
+
+        function startDragging(e) {
+            isDragging = true;
+            startX = e.clientX - initialX;
+            startY = e.clientY - initialY;
+        }
+
+        function drag(e) {
+            if (!isDragging) return;
+            e.preventDefault();
+            initialX = e.clientX - startX;
+            initialY = e.clientY - startY;
+            updatePosition();
+        }
+
+        function stopDragging() {
+            isDragging = false;
+        }
+
+        function updatePosition() {
+            svg.style.transform = `translate(calc(-50% + ${initialX}px), calc(-50% + ${initialY}px)) scale(${currentZoom})`;
+        }
+    </script>
+</body>
+</html> 
