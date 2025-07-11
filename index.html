@@ -66,7 +66,7 @@
     <script>
         if ('serviceWorker' in navigator) {
           window.addEventListener('load', function() {
-            navigator.serviceWorker.register('/firebase-messaging-sw.js')
+            navigator.serviceWorker.register('/parkingdev/firebase-messaging-sw.js')
               .then(function(registration) {
                 console.log('Service Worker registered with scope:', registration.scope);
               })
@@ -78,7 +78,7 @@
     </script>
 
     <script> if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/firebase-messaging-sw.js')
+    navigator.serviceWorker.register('/parkingdev/firebase-messaging-sw.js')
     .then(registration => {
     console.log('Service Worker registered:', registration.scope);
     })
@@ -105,7 +105,7 @@
 <body>
 <!-- Splash Screen -->
 <div id="loading">
-    <img src="assets/logo/logo-black.gif" alt="PREOSS Logo">
+    <img src="/parkingdev/assets/logo/logo-black.gif" alt="PREOSS Logo">
 </div>
 
 <!-- Script to hide splash screen -->
