@@ -28,15 +28,15 @@ self.addEventListener("notificationclick", event => {
 })
 
 
-self.addEventListener("install", function (event) {
-  event.waitUntil(preLoad());
-});
-
-let preLoad = function () {
-  return caches.open("offline").then(function (cache) {
-    return cache.addAll(["../src/index.js"]);
-  });
-};
+//self.addEventListener("install", function (event) {
+//  event.waitUntil(preLoad());
+//});
+//
+//let preLoad = function () {
+//  return caches.open("offline").then(function (cache) {
+//    return cache.addAll(["../src/index.js"]);
+//  });
+//};
 
 self.addEventListener("fetch", function (event) {
 
